@@ -35,7 +35,7 @@ accordingly.
 ./install
 ```
 
-> Note that I think the above command works. This project is still in its
+> Note that the above command _should_ work. This project is still in its
 > infancy so if you encounter problems, please file an issue.
 
 ## Features Extended

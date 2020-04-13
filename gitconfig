@@ -1,0 +1,10 @@
+[user]
+	email = dylanirlbeck@gmail.com
+	name = dylanirlbeck
+	signingkey = 3A76278D619CF386ADE70FAD276DCB900996C19E
+[core]
+	editor = nvim
+[gpg]
+	program = gpg2
+[commit]
+	gpgsign = false

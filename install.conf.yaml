@@ -1,0 +1,19 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.dotfiles: ''
+    ~/.config/nvim: config/nvim
+    ~/.zshrc: zshrc
+    ~/.config/kitty: config/kitty
+    ~/.gitconfig: gitconfig
+
+- create:
+    - ~/downloads
+    - ~/.vim/undo-history
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]

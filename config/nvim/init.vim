@@ -42,10 +42,11 @@ let g:startify_commands = [
 \ ]
 
 let g:startify_bookmarks = [
-  \ { 'c': '~/.config/nvim/init.vim' },
+  \ { 'c': '~/dotfiles/config/nvim/init.vim' },
   \ { 'g': '~/.gitconfig' },
   \ { 'z': '~/.zshrc' },
-  \ { 'a': '~/alias' }
+  \ { 'a': '~/alias' },
+  \ { 'd': '~/dotfiles' }
 \ ]
 ""\ { 'd': '~/dotfiles' },
 ""\ { 'h': '/Volumes/config' },

@@ -35,8 +35,7 @@ accordingly.
 ./install
 ```
 
-> Note that the above command _should_ work. This project is still in its
-> infancy so if you encounter problems, please file an issue.
+> Note that I don't recommend blindly copying dotfiles from anyone, including me. A better approach is to pull pieces of what want and build up your own dotfiles iteratively (so you actually understand what's going on!).
 
 ## Features Extended
 

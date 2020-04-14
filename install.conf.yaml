@@ -10,6 +10,7 @@
     ~/.zshrc: zshrc
     ~/.config/kitty: config/kitty
     ~/.gitconfig: gitconfig
+    ~/.p10k.zsh: p10k.zsh
 
 - create:
     - ~/downloads

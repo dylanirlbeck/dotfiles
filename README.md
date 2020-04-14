@@ -45,6 +45,7 @@ The features marked with `TODO` will soon be added to my Github-hosted dotfiles.
 - Neovim
 - Zsh
 - Kitty
+- [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
 - Fzf (TODO)
 - Homebrew (TODO)
 - Mac OS Setup (TODO)

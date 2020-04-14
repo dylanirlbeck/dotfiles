@@ -590,7 +590,7 @@ command! -bang -nargs=* Find call fzf#vim#grep(
 "   \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
 
 command! LS call fzf#run(fzf#wrap({'source': 'ls'}))
-
+let g:airline_theme='one'
 " Terminal mode remaps
 tnoremap <Esc> <C-\><C-n>
 

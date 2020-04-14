@@ -56,7 +56,3 @@ The features marked with `TODO` will soon be added to my Github-hosted dotfiles.
 - hammerspoon
 - prezto
 - powerline10k
-
-```
-
-```

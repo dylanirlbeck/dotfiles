@@ -165,7 +165,7 @@ endif
 " bottom status line
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
-  \ 'colorscheme': 'wombat',
+  \ 'colorscheme': 'base16_black_metal_bathory',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
@@ -391,7 +391,11 @@ nmap [r <plug>(ale_previous_wrap)
 
 highlight ALEWarning ctermbg=DarkMagenta
 
+" ***************************
+" Themes
+" ***************************
 Plug 'chriskempson/base16-vim'
+Plug 'mike-hearn/base16-vim-lightline'
 
 " **************************
 " Language-Related
@@ -438,7 +442,7 @@ call plug#end()
     else
         let g:onedark_termcolors=256
         let g:onedark_terminal_italics=1
-        colorscheme base16-horizon-dark
+        colorscheme base16-black-metal-bathory
     endif
     syntax on
     filetype plugin indent on

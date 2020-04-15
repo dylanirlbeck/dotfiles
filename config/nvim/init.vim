@@ -550,7 +550,7 @@ set t_ZH=^[[3m
 set t_ZR=^[[23m
 
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
-set guifont=Iosevka\ Nerd\ Font:h16
+set guifont=Iosevka:h16
 
 let mapleader = ','
 noremap <C-h> <C-w>h

@@ -1,4 +1,4 @@
-# dotfiles
+# dotfiles (experimental)
 
 This is a collection of neovim, zsh, and kitty configurations. These dotfiles are how _I_ like to do things, and may or may not be useful to you. I'm constantly changing these and am very much open to suggestions, so please open an issue if you have ideas!
 
@@ -37,11 +37,24 @@ accordingly.
 
 > Note that I don't recommend blindly copying dotfiles from anyone, including me. A better approach is to pull pieces of what want and build up your own dotfiles iteratively (so you actually understand what's going on!).
 
+## Neovim setup
+
+From this point on, you'll need to install [VimPlug](https://github.com/junegunn/vim-plug) for plugin management. After doing so, run `:PlugInstall` inside of Neovim to install the proper plugins.
+
+### OCaml/Reason
+
+Things you'll need:
+* [esy](esy.sh)
+* [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)
+* [opam](http://opam.ocaml.org/doc/Install.html) with OCaml version 4.06.1 installed
+
+> Note that my setup doesn't work for editing a standalone Reason file (it does support editing a standalone OCaml file). For linting/formatting and language server support, will want to edit your files inside a BuckleScript or Reason native project. 
+
 ## Features Extended
 
 The features marked with `TODO` will soon be added to my Github-hosted dotfiles.
 
-- Neovim
+- Neovim (coc.nvim, optimized for reason/ocaml development)
 - Zsh
 - Kitty
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
@@ -49,11 +62,16 @@ The features marked with `TODO` will soon be added to my Github-hosted dotfiles.
 - Homebrew (TODO)
 - Mac OS Setup (TODO)
 
-## Things I'm considering or want to investigate
+Some other random things I use on a day-to-day basis:
+
+- Alfred
+- Spectacle (though this will likely be replaced soon)
+- Flux
+- Firefox (with the Vim and GitHub dark mode extensions)
+
+## Stuff I'm actively considering or want to investigate
 
 - Onivim2
-- coc.nvim
 - tmux
 - hammerspoon
 - prezto
-- powerline10k

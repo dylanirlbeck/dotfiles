@@ -99,9 +99,6 @@ augroup nerdtree
   autocmd FileType nerdtree setlocal nocursorline " turn off line highlighting for performance
 augroup END
 
-" CoC https://github.com/neoclide/coc.nvim
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 let g:NERDTreeIndicatorMapCustom = {
   \ "Modified"  : "✹",
   \ "Staged"    : "✚",
@@ -117,16 +114,16 @@ let g:NERDTreeIndicatorMapCustom = {
 
 let NERDTreeShowHidden=1
 
-" autocomplete stuff
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" " autocomplete stuff
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/nvim-yarp'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " multi-line commenting https://github.com/preservim/nerdcommenter
 "Plug 'preservim/nerdcommenter'
@@ -245,66 +242,38 @@ autocmd BufRead,BufNewFile *.md set spell
 " *************************
 " LanguageClient
 " *************************
-"
-" Language Client https://github.com/autozimu/LanguageClient-neovim#quick-start
-Plug 'autozimu/LanguageClient-neovim', {
-   \ 'branch': 'next',
-   \ 'do': 'bash install.sh',
-   \ }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+set hidden
 
-let g:LanguageClient_serverCommands = {}
+set cmdheight=2
 
-" https://github.com/jaredly/reason-language-server#vim
-" https://github.com/jaredly/reason-language-server/releases/latest/download/bin.exe
-if executable('reason-language-server')
- let g:LanguageClient_serverCommands.reason = ['reason-language-server']
-endif
 
-" https://github.com/theia-ide/typescript-language-server
-if executable('typescript-language-server')
- let g:LanguageClient_serverCommands.javascript = ['typescript-language-server', '--stdio']
- let g:LanguageClient_serverCommands.typescript = ['typescript-language-server', '--stdio']
-endif
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-" https://github.com/vscode-langservers/vscode-css-languageserver-bin
-if executable('css-languageserver')
- let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
- let g:LanguageClient_serverCommands.scss = ['css-languageserver', '--stdio']
- let g:LanguageClient_serverCommands.sass = ['css-languageserver', '--stdio']
-endif
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" https://github.com/vscode-langservers/vscode-json-languageserver-bin
-if executable('json-languageserver')
- let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
-endif
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" https://github.com/vscode-langservers/vscode-html-languageserver-bin
-if executable('html-languageserver')
- let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
-endif
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
-" https://github.com/redhat-developer/yaml-language-server
-if executable('yaml-language-server')
- let g:LanguageClient_serverCommands.yaml = ['yaml-language-server', '--stdio']
-endif
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-
-" Language Server Stop/Go shortcuts
-"nnoremap <leader> fd :LanguageClientStop<cr>
-"nnoremap <leader> fg :LanguageClientStart<cr>
-nnoremap <silent> md :call LanguageClient_statusLine()<cr>
-
-" gd Show type info (and short doc) of identifier under cursor.
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
-
-" gf Formats code in normal mode
-nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<cr>
-
-" Show type info (and short doc) of identifier under cursor.
- nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
-
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 nnoremap <silent> gn :ALENext<CR>
 
 " Note, you need to open vim in the root directory of a project (where the
@@ -455,17 +424,17 @@ call plug#end()
 " }}}
 "
 " https://github.com/Shougo/deoplete.nvim/blob/378feff8772d0e9f9ef2c94284947f3666576500/doc/deoplete.txt
-call deoplete#custom#option({
-\ 'prev_completion_mode': "mirror",
-\ })
+" call deoplete#custom#option({
+" \ 'prev_completion_mode': "mirror",
+" \ })
 
 
 " https://github.com/tbodt/deoplete-tabnine
 " [tabnine]
-call deoplete#custom#var('tabnine', {
-    \ 'line_limit': 800,
-    \ 'max_num_results': 5,
-    \ })
+" call deoplete#custom#var('tabnine', {
+"     \ 'line_limit': 800,
+"     \ 'max_num_results': 5,
+"     \ })
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
@@ -569,7 +538,7 @@ else
   endif
 
 " disable preview buffer for Reason autocomplete
-set completeopt-=preview
+" set completeopt-=preview
 
 "Use ripgrep
 let g:ackprg = 'rg --vimgrep --no-heading'

@@ -5,9 +5,11 @@ call plug#begin('~/.config/nvim/bundle')
 " *************************
 " General Enhancements
 " *************************
+" Copies text to system clipboard as well as buffer
+set mouse=c
 " Lets you use the mouse to click around
 if has('mouse')
-    set mouse=a
+    set mouse+=a
 endif
 
 " Jump to ay definition and references https://github.com/pechorin/any-jump.vim
@@ -99,9 +101,6 @@ augroup nerdtree
   autocmd FileType nerdtree setlocal nocursorline " turn off line highlighting for performance
 augroup END
 
-" CoC https://github.com/neoclide/coc.nvim
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 let g:NERDTreeIndicatorMapCustom = {
   \ "Modified"  : "✹",
   \ "Staged"    : "✚",
@@ -117,16 +116,16 @@ let g:NERDTreeIndicatorMapCustom = {
 
 let NERDTreeShowHidden=1
 
-" autocomplete stuff
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" " autocomplete stuff
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/nvim-yarp'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " multi-line commenting https://github.com/preservim/nerdcommenter
 "Plug 'preservim/nerdcommenter'
@@ -236,104 +235,103 @@ autocmd BufRead *.es6 set filetype=javascript
 autocmd BufRead *.jsx set filetype=javascript 
 autocmd BufRead *.tsx set filetype=typescript 
 autocmd BufRead *.ts set filetype=typescript
-autocmd BufRead *.re set filetype=reason
-autocmd BufRead *.rei set filetype=reason
+autocmd BufRead,BufNewFile *.re set filetype=reason
+autocmd BufRead,BufNewFile *.rei set filetype=reason
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md set spell
+autocmd BufRead,BufNewFile *.ml set filetype=ocaml
+autocmd BufRead,BufNewFile *.mli set filetype=ocaml
 
 " *************************
 " LanguageClient
 " *************************
-"
-" Language Client https://github.com/autozimu/LanguageClient-neovim#quick-start
-Plug 'autozimu/LanguageClient-neovim', {
-   \ 'branch': 'next',
-   \ 'do': 'bash install.sh',
-   \ }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-let g:LanguageClient_serverCommands = {}
+" Async linting ALE
+Plug 'dense-analysis/ale'
 
-" https://github.com/jaredly/reason-language-server#vim
-" https://github.com/jaredly/reason-language-server/releases/latest/download/bin.exe
-if executable('reason-language-server')
- let g:LanguageClient_serverCommands.reason = ['reason-language-server']
-endif
 
-" https://github.com/theia-ide/typescript-language-server
-if executable('typescript-language-server')
- let g:LanguageClient_serverCommands.javascript = ['typescript-language-server', '--stdio']
- let g:LanguageClient_serverCommands.typescript = ['typescript-language-server', '--stdio']
-endif
+set hidden
 
-" https://github.com/vscode-langservers/vscode-css-languageserver-bin
-if executable('css-languageserver')
- let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
- let g:LanguageClient_serverCommands.scss = ['css-languageserver', '--stdio']
- let g:LanguageClient_serverCommands.sass = ['css-languageserver', '--stdio']
-endif
+set cmdheight=2
 
-" https://github.com/vscode-langservers/vscode-json-languageserver-bin
-if executable('json-languageserver')
- let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
-endif
 
-" https://github.com/vscode-langservers/vscode-html-languageserver-bin
-if executable('html-languageserver')
- let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
-endif
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-" https://github.com/redhat-developer/yaml-language-server
-if executable('yaml-language-server')
- let g:LanguageClient_serverCommands.yaml = ['yaml-language-server', '--stdio']
-endif
+" Use K to show documentation in preview window.
+nnoremap <silent> <cr> :call <SID>show_documentation()<CR>
 
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Language Server Stop/Go shortcuts
-"nnoremap <leader> fd :LanguageClientStop<cr>
-"nnoremap <leader> fg :LanguageClientStart<cr>
-nnoremap <silent> md :call LanguageClient_statusLine()<cr>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
-" gd Show type info (and short doc) of identifier under cursor.
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
-" gf Formats code in normal mode
-nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<cr>
-
-" Show type info (and short doc) of identifier under cursor.
- nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
-
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 nnoremap <silent> gn :ALENext<CR>
 
 " Note, you need to open vim in the root directory of a project (where the
 " .bsconfig is) in order to get the formatting to work properly.
-let g:ale_reason_ls_executable = "reason-language-server"
-let g:ale_reasonml_refmt_executable = "./node_modules/.bin/bsrefmt"
+let g:ale_ocaml_ocamlformat_options = "--enable-outside-detected-project"
 
 let g:ale_completion_enabled = 0
 let g:ale_fix_on_save = 1
 let g:ale_linters = {
   \ 'javascript': ['eslint'],
-  \ 'reason': ['reason-language-server'],
   \ 'typescript': ['tsserver'],
+  \ 'reason': ['ocaml-lsp'],
+  \ 'ocaml': ['ocaml-lsp'],
   \}
 let g:ale_linters_ignore = {
   \ 'typescript': ['tslint'],
-  \ 'reason': ['ols']
   \}
 let g:ale_fixers = {
   \ 'html': ['prettier'],
   \ 'javascript': ['prettier'],
-  \ 'reason': ['refmt'],
+  \ 'ocaml': ['ocamlformat'],
   \ 'json': ['prettier'],
   \ 'markdown': ['prettier'],
   \ 'typescript': ['prettier', 'eslint'],
   \}
 
-" Show detailed error under cursor
-nnoremap <silent> ge :call LanguageClient_explainErrorAtPoint()<cr>
+" OCaml/Reason specific stuff
+
+function! s:fix_refmt(buffer) abort
+  let ext = expand('#' . a:buffer . ':e')
+  if ext ==# 'rei'
+    return {
+    \   'command': 'esy refmt --interface true'
+    \}
+  else
+    return {
+    \   'command': 'esy refmt'
+    \}
+  endif
+endfunction
+
+if filereadable("./node_modules/.bin/bsrefmt")
+  " We're in a BuckleScript project
+  let g:ale_reasonml_refmt_executable = "./node_modules/.bin/bsrefmt"
+  let g:ale_fixers.reason = ['refmt']
+else
+  " We're in a native project
+  let g:ale_fixers.reason = [function('s:fix_refmt')] 
+endif
 
 let g:ale_set_balloons = 1
 
@@ -343,48 +341,13 @@ let g:ale_linters_explicit = 1
 " keep side gutter open https://github.com/dense-analysis/ale#5ii-how-can-i-keep-the-sign-gutter-open
 let g:ale_sign_column_always = 1
 
-" run the linter only on these
-"let g:ale_linters = {
-  "\ 'html': ['eslint'],
-  "\ 'css': ['eslint'],
-  "\ 'json': ['eslint'],
-  "\ 'javascript': ['eslint'],
-  "\ 'typescript': ['eslint'],
-  "\ 'reason': ['reason-language-server'],
-  "\}
-
-"let g:ale_fixers = {
-  "\ 'javascript': ['prettier', 'eslint'],
-  "\ 'typescript': ['prettier', 'eslint'],
-  "\ 'json': ['prettier', 'eslint'],
-  "\ 'css': ['prettier'],
-  "\ 'reason': ['refmt'],
-  "\}
-
 " enable fix/lint on save (prettier,refmt) https://www.rockyourcode.com/reason-ml-development-with-vim/
 let g:ale_sign_error                  = '✘'
 let g:ale_sign_warning                = '⚠'
 highlight ALEErrorSign ctermbg        =NONE ctermfg=red
 highlight ALEWarningSign ctermbg      =NONE ctermfg=yellow
-"let g:ale_linters_explicit            = 1
-"let g:ale_lint_on_text_changed        = 'never'
-"let g:ale_lint_on_enter               = 0
 let g:ale_lint_on_save                = 1
-"let g:ale_fix_on_save = 1
 
-" Async linting ALE
-Plug 'dense-analysis/ale'
-
-" Example key bindings
-" nmap <leader>gd <plug>(ale_go_to_definition)
-nmap <leader>at <plug>(ale_go_to_type_definition)
-nmap <leader>ah <plug>(ale_hover)
-nmap <leader>ad <plug>(ale_documentation)
-nmap <leader>ap <plug>(ale_detail)
-nmap <leader>af <plug>(ale_fix)
-nmap <leader>al <plug>(ale_lint)
-nmap <leader>ar <plug>(ale_find_references)
-imap <c-c> <plug>(ale_complete)
 "Move between linting errors
 nmap ]r <plug>(ale_next_wrap)
 nmap [r <plug>(ale_previous_wrap)
@@ -458,19 +421,6 @@ call plug#end()
     highlight Normal ctermbg=none
 " }}}
 "
-" https://github.com/Shougo/deoplete.nvim/blob/378feff8772d0e9f9ef2c94284947f3666576500/doc/deoplete.txt
-call deoplete#custom#option({
-\ 'prev_completion_mode': "mirror",
-\ })
-
-
-" https://github.com/tbodt/deoplete-tabnine
-" [tabnine]
-call deoplete#custom#var('tabnine', {
-    \ 'line_limit': 800,
-    \ 'max_num_results': 5,
-    \ })
-
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
@@ -573,7 +523,7 @@ else
   endif
 
 " disable preview buffer for Reason autocomplete
-set completeopt-=preview
+" set completeopt-=preview
 
 "Use ripgrep
 let g:ackprg = 'rg --vimgrep --no-heading'

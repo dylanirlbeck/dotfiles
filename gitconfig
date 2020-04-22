@@ -4,12 +4,6 @@
 [alias]
     cleanup = "!git remote prune origin && git gc && git clean -df && git stash clear"
 
-    # Remove branches that have already been merged with master
-    # a.k.a. ‘delete merged’
-    dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-
-    day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
-
     # find commits by source code
     fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
 
@@ -124,7 +118,7 @@
     required = true
 
 [fetch]
-    prune = true
+    prune = true # Remove stale refs to remote from, e.g., reflog and autocomplete
 
 [stash]
     showPatch = true

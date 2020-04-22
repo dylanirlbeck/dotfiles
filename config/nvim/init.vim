@@ -247,6 +247,13 @@ autocmd BufRead,BufNewFile *.mli set filetype=ocaml
 " LanguageClient
 " *************************
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Install/uninstall the following with :CocInstall/:CocUninstall
+" coc-json
+" coc-tsserver
+" coc-css
+" coc-tailwindcss
+" coc-yaml
+" View all extensions with :CocList extensions
 
 " Async linting ALE
 Plug 'dense-analysis/ale'
@@ -407,8 +414,6 @@ call plug#end()
         let g:onedark_terminal_italics=1
         colorscheme base16-black-metal-bathory
     endif
-    syntax on
-    filetype plugin indent on
     " make the highlighting of tabs and other non-text less annoying
     highlight SpecialKey ctermfg=19 guifg=#333333
     highlight NonText ctermfg=19 guifg=#333333

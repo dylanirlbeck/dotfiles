@@ -44,11 +44,12 @@ From this point on, you'll need to install [VimPlug](https://github.com/junegunn
 ### OCaml/Reason
 
 Things you'll need:
-* [esy](esy.sh)
-* [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)
-* [opam](http://opam.ocaml.org/doc/Install.html) with OCaml version 4.06.1 installed
 
-> Note that my setup doesn't work for editing a standalone Reason file (it does support editing a standalone OCaml file). For linting/formatting and language server support, will want to edit your files inside a BuckleScript or Reason native project. 
+- [esy](esy.sh)
+- [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)
+- [opam](http://opam.ocaml.org/doc/Install.html) with OCaml version 4.06.1 installed
+
+> Note that my setup doesn't work for editing a standalone Reason file (it does support editing a standalone OCaml file). For linting/formatting and language server support, will want to edit your files inside a BuckleScript or Reason native project.
 
 ## Features Extended
 
@@ -58,6 +59,7 @@ The features marked with `TODO` will soon be added to my Github-hosted dotfiles.
 - Zsh
 - Kitty
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
+- [Hammerspoon](http://www.hammerspoon.org/go/)
 - Fzf (TODO)
 - Homebrew (TODO)
 - Mac OS Setup (TODO)
@@ -65,7 +67,6 @@ The features marked with `TODO` will soon be added to my Github-hosted dotfiles.
 Some other random things I use on a day-to-day basis:
 
 - Alfred
-- Spectacle (though this will likely be replaced soon)
 - Flux
 - Firefox (with the Vim and GitHub dark mode extensions)
 
@@ -73,5 +74,4 @@ Some other random things I use on a day-to-day basis:
 
 - Onivim2
 - tmux
-- hammerspoon
 - prezto

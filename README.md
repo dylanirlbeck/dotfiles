@@ -45,9 +45,10 @@ From this point on, you'll need to install [VimPlug](https://github.com/junegunn
 
 Things you'll need:
 
-- [esy](esy.sh)
-- [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)
-- [opam](http://opam.ocaml.org/doc/Install.html) with OCaml version 4.06.1 installed
+* [esy](esy.sh)
+* [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)
+* [opam](http://opam.ocaml.org/doc/Install.html) with OCaml version 4.06.1 installed
+* [ocaml-lsp](https://github.com/ocaml/ocaml-lsp)
 
 > Note that my setup doesn't work for editing a standalone Reason file (it does support editing a standalone OCaml file). For linting/formatting and language server support, will want to edit your files inside a BuckleScript or Reason native project.
 

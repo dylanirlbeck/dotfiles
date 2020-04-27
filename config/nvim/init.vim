@@ -247,6 +247,8 @@ autocmd BufRead,BufNewFile *.mli set filetype=ocaml
 " LanguageClient
 " *************************
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'iamcco/coc-tailwindcss', {'do': 'yarn install --frozen-lockfile && yarn run build'}
+
 " Install/uninstall the following with :CocInstall/:CocUninstall
 " coc-json
 " coc-tsserver
@@ -543,10 +545,15 @@ command! -bang -nargs=* Rg call fzf#vim#files('.', {'source': g:rg_find_command}
 command! -bang -nargs=* Find call fzf#vim#grep(
   \ 'rg --column --line-number --no-heading --follow --ignore-case --color=always '.<q-args>, 1,
   \ <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
-" command! -bang -nargs=? -complete=dir Files
-"   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
-" command! -bang -nargs=? -complete=dir GitFiles
-"   \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
+
+" Always enable preview window on the right with 60% width
+let g:fzf_files_options = '--preview "bat --theme="OneHalfDark" --style=numbers,changes --color always {3..-1} | head -200" --expect=ctrl-v,ctrl-x'
+
+ " command! -bang -nargs=? -complete=dir Files
+ "   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+ " command! -bang -nargs=? -complete=dir GitFiles
+ "   \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 command! LS call fzf#run(fzf#wrap({'source': 'ls'}))
 let g:airline_theme='one'

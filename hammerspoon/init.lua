@@ -5,7 +5,7 @@ local Grid = require "grid"
 
 local mashApps = {
   'cmd',
-  'shift'
+  'option'
 }
 
 local mashGeneral = {
@@ -17,29 +17,29 @@ local mashGeneral = {
 hs.window.animationDuration = 0
 
 -- Window Management
-hs.hotkey.bind(mashGeneral, 'O', Grid.fullscreen)
-hs.hotkey.bind(mashGeneral, 'H', Grid.leftchunk)
-hs.hotkey.bind(mashGeneral, 'L', Grid.rightchunk)
-hs.hotkey.bind(mashGeneral, 'K', Grid.topHalf)
-hs.hotkey.bind(mashGeneral, 'J', Grid.bottomHalf)
+hotkey.bind(mashGeneral, 'O', Grid.fullscreen)
+hotkey.bind(mashGeneral, 'H', Grid.leftchunk)
+hotkey.bind(mashGeneral, 'L', Grid.rightchunk)
+hotkey.bind(mashGeneral, 'K', Grid.topHalf)
+hotkey.bind(mashGeneral, 'J', Grid.bottomHalf)
 
-hs.hotkey.bind(mashGeneral, 'U', Grid.topleft)
-hs.hotkey.bind(mashGeneral, 'N', Grid.bottomleft)
-hs.hotkey.bind(mashGeneral, 'I', Grid.topright)
-hs.hotkey.bind(mashGeneral, 'M', Grid.bottomright)
+hotkey.bind(mashGeneral, 'U', Grid.topleft)
+hotkey.bind(mashGeneral, 'N', Grid.bottomleft)
+hotkey.bind(mashGeneral, 'I', Grid.topright)
+hotkey.bind(mashGeneral, 'M', Grid.bottomright)
 
 -- Spotify
-hs.hotkey.bind(mashGeneral, 'P', hs.spotify.play)
-hs.hotkey.bind(mashGeneral, 'Y', hs.spotify.pause)
-hs.hotkey.bind(mashGeneral, 'T', hs.spotify.displayCurrentTrack)
+hotkey.bind(mashGeneral, 'P', hs.spotify.play)
+hotkey.bind(mashGeneral, 'Y', hs.spotify.pause)
+hotkey.bind(mashGeneral, 'T', hs.spotify.displayCurrentTrack)
 
 -- Slack-specific app launcher (since I keep it "peeked" to the side by default)
 function showSlack()
   local appName = 'Slack'
-  local app = hs.application.find(appName)
-  hs.application.launchOrFocus(appName)
+  local app = application.find(appName)
+  application.launchOrFocus(appName)
 
-  if (app and hs.application.isRunning(app)) then
+  if (app and application.isRunning(app)) then
     Grid.topleft()
   end
 end

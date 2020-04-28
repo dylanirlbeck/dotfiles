@@ -260,6 +260,8 @@ Plug 'iamcco/coc-tailwindcss', {'do': 'yarn install --frozen-lockfile && yarn ru
 " Async linting ALE
 Plug 'dense-analysis/ale'
 
+command! ALEToggleFixer execute "let g:ale_fix_on_save = get(g:, 'ale_fix_on_save', 0) ? 0 : 1"
+
 
 set hidden
 

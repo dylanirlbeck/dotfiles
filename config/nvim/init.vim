@@ -247,7 +247,6 @@ autocmd BufRead,BufNewFile *.mli set filetype=ocaml
 " LanguageClient
 " *************************
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'iamcco/coc-tailwindcss', {'do': 'yarn install --frozen-lockfile && yarn run build'}
 
 " Install/uninstall the following with :CocInstall/:CocUninstall
 " coc-json

@@ -93,6 +93,22 @@ compinit
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
 
+# Kitty functions
+function kt-native() {
+  export PROJECT_DIR=$1
+  kitty --session ~/dotfiles/config/kitty/reason_native.conf
+}
+
+function kt-bs() {
+  export PROJECT_DIR=$1
+  kitty --session ~/dotfiles/config/kitty/bucklescript.conf
+}
+
+function kt-js() {
+  export PROJECT_DIR=$1
+  kitty --session ~/dotfiles/config/kitty/javascript.conf
+}
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"

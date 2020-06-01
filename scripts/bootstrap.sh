@@ -43,6 +43,7 @@ brew upgrade
 ###############################################################################
 echo "Homebrew: updating unix tools..."
 brew install zsh
+brew install zsh-completions
 
 # Change the default shell to zsh
 zsh_path="$( command -v zsh )"
@@ -75,15 +76,19 @@ done
 # Install binaries and other packages
 ###############################################################################
 echo "Homebrew: installing binaries and other packages..."
+brew install bat
 brew install fzf
 brew install git
+brew install git-delta
 brew install httpie # https://httpie.org/
+brew install hub
 brew install kitty # https://formulae.brew.sh/cask/kitty
 #brew install mackup
 brew install mas # https://github.com/mas-cli/mas
 brew install neovim
 brew install nginx
 brew install node
+brew install ripgrep
 brew install Schniz/tap/fnm # Fast Node Manager - https://github.com/Schniz/fnm
 brew install rename # rename -x *- http://plasmasturm.org/code/rename/
 brew install tree

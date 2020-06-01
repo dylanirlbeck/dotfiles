@@ -46,7 +46,7 @@ From this point on, you'll need to install [VimPlug](https://github.com/junegunn
 Things you'll need:
 
 * [esy](esy.sh)
-* [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)
+* [ocamlformat](https://github.com/ocaml-ppx/ocamlformat) -- note, if you want to use `ocamlformat` with my ALE setup you'll likely need to run `opam pin ocamlformat 0.14.1` to put `ocamlformat` in your system's PATH
 * [opam](http://opam.ocaml.org/doc/Install.html) with OCaml version 4.06.1 installed
 * [ocaml-lsp](https://github.com/ocaml/ocaml-lsp)
 

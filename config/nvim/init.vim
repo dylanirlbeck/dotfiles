@@ -295,8 +295,6 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 nnoremap <silent> gn :ALENext<CR>
 
-" Note, you need to open vim in the root directory of a project (where the
-" .bsconfig is) in order to get the formatting to work properly.
 let g:ale_ocaml_ocamlformat_options = "--enable-outside-detected-project"
 
 let g:ale_completion_enabled = 0
@@ -321,6 +319,9 @@ let g:ale_fixers = {
 
 " OCaml/Reason specific stuff
 
+
+" Note, you need to open vim in the root directory of a project (where the
+" .bsconfig is) in order to get refmt to work properly.
 function! s:fix_refmt(buffer) abort
   let ext = expand('#' . a:buffer . ':e')
   if ext ==# 'rei'

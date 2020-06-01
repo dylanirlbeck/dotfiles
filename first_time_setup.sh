@@ -6,11 +6,11 @@ read -n 1
 ## TODO investigate using a Brewfile
 # brew bundle
 
-echo 'Symlink setup'
-source ./install
-
 echo 'Package and app downloads'
 source scripts/bootstrap.sh
+
+echo 'Symlink setup'
+source ./install
 
 echo 'MacOS Setup'
 source scripts/setup_mac.sh

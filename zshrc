@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/dylanirlbeck/.oh-my-zsh"
+# export ZSH="/Users/dylanirlbeck/.oh-my-zsh"
 export GPG_TTY=$(tty)
 export PATH="$HOME/bin:$PATH"
 
@@ -81,7 +81,7 @@ DISABLE_UPDATE_PROMPT="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git npm yarn zsh-autosuggestions)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # Custom cd
 chpwd() ls
@@ -132,8 +132,8 @@ function kt-js() {
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-DEFAULT_USER="dylanirlbeck"
-source $HOME/alias
+DEFAULT_USER="dylan"
+source $HOME/.dotfiles/alias
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 set -o vi
@@ -143,3 +143,14 @@ set -o vi
 
 # opam configuration
 test -r /Users/dylanirlbeck/.opam/opam-init/init.zsh && . /Users/dylanirlbeck/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Flexport-specific
+export GITHUB_USERNAME='dylan'
+
+eval `fnm env`
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

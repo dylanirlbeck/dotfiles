@@ -34,8 +34,7 @@
     untrackedCache = true
 	safecrlf = false
 
-[pager]
-  pager = delta --plus-color="#012800" --minus-color="#340001"
+    pager = delta --plus-color="#012800" --minus-color="#340001"
 
 [interactive]
   diffFilter = delta --color-only
@@ -53,12 +52,6 @@
 
 [difftool]
   prompt = false
-
-[diff]
-  tool = vimdiff
-  # Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
-  # https://blog.github.com/2018-04-05-git-217-released/
-  colorMoved = zebra
 
 [url "git@github.com:"]
     insteadOf = "gh:"
@@ -82,7 +75,7 @@
 
 # push easily. http://stackoverflow.com/a/23918418/89484
 [push]
-  default = current
+	default = current
   followTags = true
 
 [filter "lfs"]

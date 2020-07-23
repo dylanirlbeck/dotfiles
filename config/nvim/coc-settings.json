@@ -1,9 +1,20 @@
 {
+  "solargraph.commandPath": "/Users/dylan/.rvm/gems/ruby-2.6.2/wrappers/solargraph",
+  "solargraph.useBundler": false,
+  "javascript.validate.enable": false,
   "languageserver": {
     "ocaml-lsp": {
       "command": "opam",
       "args": ["config", "exec", "--", "ocamllsp"],
       "filetypes": ["ocaml", "reason"]
+    },
+    "sorbet": {
+      "command": "srb",
+      "args": ["tc", "--lsp", "--enable-all-experimental-lsp-features"],
+      "filetypes": ["ruby"],
+      "rootPatterns": ["sorbet/config"],
+      "initializationOptions": {},
+      "settings": {}
     }
   }
 }

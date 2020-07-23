@@ -21,6 +21,25 @@ Plug 'mhinz/vim-startify'
 " editorconfig support https://github.com/sgur/vim-editorconfig
 Plug 'sgur/vim-editorconfig'
 
+" Ruby on rails support https://github.com/tpope/vim-rails
+Plug 'tpope/vim-rails'
+
+" let g:rails_projections =  {
+"   \   "lib/**/*.rb": {
+"   \     "command": "lib",
+"   \     "test": "spec/use_cases/%s_spec.rb",
+"   \     "related": "spec/use_cases/%s_spec.rb",
+"   \   }
+"   \ }
+
+" Automatically add 'end' to blocks https://github.com/tpope/vim-endwise
+Plug 'tpope/vim-endwise'
+
+" UNIX shell commands (:Rename, :Delete, :Move, :Mkdir) for Vim https://github.com/tpope/vim-eunuch
+Plug 'tpope/vim-eunuch'
+
+command! -nargs=1 CreateFile :e %:h/<args>
+
 " Don't change to directory when selecting a file
 let g:startify_files_number = 5
 let g:startify_change_to_dir = 0
@@ -47,7 +66,7 @@ let g:startify_bookmarks = [
   \ { 'c': '~/dotfiles/config/nvim/init.vim' },
   \ { 'g': '~/.gitconfig' },
   \ { 'z': '~/.zshrc' },
-  \ { 'a': '~/alias' },
+  \ { 'a': '~/dotfiles/alias' },
   \ { 'd': '~/dotfiles' }
 \ ]
 ""\ { 'd': '~/dotfiles' },
@@ -85,7 +104,7 @@ Plug 'junegunn/goyo.vim'
 " directory tree
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
@@ -242,6 +261,7 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md set spell
 autocmd BufRead,BufNewFile *.ml set filetype=ocaml
 autocmd BufRead,BufNewFile *.mli set filetype=ocaml
+autocmd BufRead,BufNewFile *.rb set filetype=ruby
 
 " *************************
 " LanguageClient
@@ -297,13 +317,18 @@ nnoremap <silent> gn :ALENext<CR>
 
 let g:ale_ocaml_ocamlformat_options = "--enable-outside-detected-project"
 
+" Ruby-specific stuff
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_ruby_rubocop_options = '--config $HOME/flexport/.rubocop.yml'
+
 let g:ale_completion_enabled = 0
 let g:ale_fix_on_save = 1
 let g:ale_linters = {
-  \ 'javascript': ['eslint'],
+  \ 'javascript': ['eslint', 'flow-language-server'],
   \ 'typescript': ['tsserver'],
   \ 'reason': ['ocaml-lsp'],
   \ 'ocaml': ['ocaml-lsp'],
+  \ 'ruby': ['rubocop'],
   \}
 let g:ale_linters_ignore = {
   \ 'typescript': ['tslint'],
@@ -315,6 +340,7 @@ let g:ale_fixers = {
   \ 'json': ['prettier'],
   \ 'markdown': ['prettier'],
   \ 'typescript': ['prettier', 'eslint'],
+  \ 'ruby': ['rubocop'],
   \}
 
 " OCaml/Reason specific stuff
@@ -391,11 +417,11 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 let g:typescript_indent_disable = 1
 
 " Javascript
-Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
-Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js', 'jsx' ]}
-Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'jsx' ]}
-Plug 'chemzqm/vim-jsx-improve', { 'for': [ 'javascript', 'js', 'jsx' ]}
-Plug 'gavocanov/vim-js-indent', { 'for': [ 'javascript', 'js', 'jsx' ]}
+"Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
+"Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js', 'jsx' ]}
+"Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'jsx' ]}
+"Plug 'chemzqm/vim-jsx-improve', { 'for': [ 'javascript', 'js', 'jsx' ]}
+"Plug 'gavocanov/vim-js-indent', { 'for': [ 'javascript', 'js', 'jsx' ]}
 
 
 " graphql

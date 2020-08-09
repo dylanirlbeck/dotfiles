@@ -1,6 +1,6 @@
 [user]
-	email = dylanirlbeck@gmail.com
-	name = dylanirlbeck
+    email = dylan@flexport.com  
+	name = Dylan Irlbeck
 [alias]
     cleanup = "!git remote prune origin && git gc && git clean -df && git stash clear"
 

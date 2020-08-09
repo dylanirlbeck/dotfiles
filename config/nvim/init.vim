@@ -2,6 +2,10 @@
 " VimPlug
 " *********************************
 call plug#begin('~/.config/nvim/bundle')
+
+" Set leader key to comma
+let mapleader = ','
+
 " *************************
 " General Enhancements
 " *************************
@@ -537,7 +541,6 @@ set t_ZR=^[[23m
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 set guifont=Iosevka:h16
 
-let mapleader = ','
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k

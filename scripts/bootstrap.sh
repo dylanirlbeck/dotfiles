@@ -80,8 +80,8 @@ brew install bat
 brew install fzf
 brew install git
 brew install git-delta
-brew install httpie # https://httpie.org/
 brew install hub
+brew install httpie # https://httpie.org/
 brew install kitty # https://formulae.brew.sh/cask/kitty
 #brew install mackup
 brew install mas # https://github.com/mas-cli/mas

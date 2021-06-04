@@ -13,6 +13,16 @@ export ZSH="/Users/dylanirlbeck/.oh-my-zsh"
 export GPG_TTY=$(tty)
 export PATH="$HOME/bin:$PATH"
 
+export EDITOR=nvim
+export VISUAL=nvim
+export ANDROID_SDK=/Users/dylanirlbeck/Library/Android/sdk
+export PATH=/Users/dylanirlbeck/Library/Android/sdk/platform-tools:$PATH
+
+# Zlib stuff
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include"
+export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+
 # Flutter
 export PATH="$PATH:$HOME/bin/flutter/bin"
 
@@ -109,6 +119,23 @@ function kt-js() {
   kitty --session ~/dotfiles/config/kitty/javascript.conf
 }
 
+# fbd - delete git branch (including remote branches); credit to peterpme
+fbd() {
+  local branches branch
+  branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+  branch=$(echo "$branches" | fzf --multi ) &&
+  git branch -D $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+
+# fco - checkout local git branch (inspired by peterpme's fbd above)
+fco() {
+  local branches branch
+  branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+  branch=$(echo "$branches" | fzf --multi ) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -135,6 +162,8 @@ function kt-js() {
 DEFAULT_USER="dylanirlbeck"
 source $HOME/alias
 
+eval "$(fnm env)"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 set -o vi
 
@@ -143,3 +172,8 @@ set -o vi
 
 # opam configuration
 test -r /Users/dylanirlbeck/.opam/opam-init/init.zsh && . /Users/dylanirlbeck/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# Ruby stuff
+export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"

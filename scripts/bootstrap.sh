@@ -88,7 +88,7 @@ brew install mas # https://github.com/mas-cli/mas
 brew install neovim
 brew install nginx
 brew install node
-brew install ripgreb
+brew install ripgrep
 brew install Schniz/tap/fnm # Fast Node Manager - https://github.com/Schniz/fnm
 brew install rename # rename -x *- http://plasmasturm.org/code/rename/
 brew install tree

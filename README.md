@@ -1,4 +1,4 @@
-# dotfiles (experimental)
+# dotfiles
 
 This is a collection of neovim, zsh, and kitty configurations. These dotfiles are how _I_ like to do things, and may or may not be useful to you. I'm constantly changing these and am very much open to suggestions, so please open an issue if you have ideas!
 
@@ -36,6 +36,16 @@ accordingly.
 ```
 
 > Note that I don't recommend blindly copying dotfiles from anyone, including me. A better approach is to pull pieces of what want and build up your own dotfiles iteratively (so you actually understand what's going on!).
+
+### First time setup for MacOS users (experimental)
+
+After cloning this repo, you can run `first_time_setup.sh` to get a copy of *my* MacOS setup (i.e. apps, packages, dock, and general settings).
+
+```
+./first_time_setup.sh
+```
+
+> Note that this script is rather new and very experimental, and you should use with discretion.
 
 ## Neovim setup
 

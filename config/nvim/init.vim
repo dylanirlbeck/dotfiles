@@ -2,6 +2,7 @@
 " VimPlug
 " *********************************
 call plug#begin('~/.config/nvim/bundle')
+let mapleader = ','
 " *************************
 " General Enhancements
 " *************************
@@ -12,14 +13,30 @@ if has('mouse')
     set mouse+=a
 endif
 
+" Flutter dev
+Plug 'dart-lang/dart-vim-plugin'
+
 " Jump to ay definition and references https://github.com/pechorin/any-jump.vim
 Plug 'pechorin/any-jump.vim'
+
+Plug 'djoshea/vim-autoread'
 
 " Fancy start screen. Lets you open empty buffers, multiple files, etc
 Plug 'mhinz/vim-startify'
 
 " editorconfig support https://github.com/sgur/vim-editorconfig
 Plug 'sgur/vim-editorconfig'
+
+" Automatically add 'end' to blocks https://github.com/tpope/vim-endwise
+Plug 'tpope/vim-endwise'
+
+" UNIX shell commands (:Rename, :Delete, :Move, :Mkdir) for Vim https://github.com/tpope/vim-eunuch
+Plug 'tpope/vim-eunuch'
+
+" Helpful Vim mappings https://github.com/tpope/vim-unimpaired
+Plug 'tpope/vim-unimpaired'
+
+command! -nargs=1 CreateFile :e %:h/<args>
 
 " Don't change to directory when selecting a file
 let g:startify_files_number = 5
@@ -48,7 +65,8 @@ let g:startify_bookmarks = [
   \ { 'g': '~/.gitconfig' },
   \ { 'z': '~/.zshrc' },
   \ { 'a': '~/alias' },
-  \ { 'd': '~/dotfiles' }
+  \ { 'd': '~/dotfiles' },
+  \ { 'j': '~/.gthnk/journal.txt' }
 \ ]
 ""\ { 'd': '~/dotfiles' },
 ""\ { 'h': '/Volumes/config' },
@@ -63,13 +81,13 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 let g:mkdp_refresh_slow = 1
 
 " Helps with writing Markdown (auto-formatting) https://github.com/reedes/vim-pencil
-Plug 'reedes/vim-pencil'
+"Plug 'reedes/vim-pencil'
 
-augroup pencil
-  autocmd!
-  autocmd FileType markdown call pencil#init({'wrap': 'hard', 'autoformat': 1})
-  autocmd FileType text     call pencil#init({'wrap': 'hard', 'autoformat': 0})
-augroup END
+" augroup pencil
+"   autocmd!
+"   autocmd FileType markdown call pencil#init({'wrap': 'hard', 'autoformat': 1})
+"   autocmd FileType text     call pencil#init({'wrap': 'hard', 'autoformat': 0})
+" augroup END
 " Markdown-related stuff https://github.com/plasticboy/vim-markdown --- Not sure
 " about the use here
 "Plug 'godlygeek/tabular'
@@ -87,9 +105,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <leader>g :GitGutterToggle<CR>
+" SKELETONS https://vimtricks.com/p/automated-file-templates/
+autocmd BufNewFile *.sh 0r ~/dotfiles/skeletons/bash.sh
 
 let NERDTreeDirArrowExpandable = "\u00a0" " make arrows invisible
 let NERDTreeDirArrowCollapsible = "\u00a0" " make arrows invisible
@@ -101,7 +118,7 @@ augroup nerdtree
   autocmd FileType nerdtree setlocal nocursorline " turn off line highlighting for performance
 augroup END
 
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
   \ "Modified"  : "✹",
   \ "Staged"    : "✚",
   \ "Untracked" : "✭",
@@ -115,6 +132,10 @@ let g:NERDTreeIndicatorMapCustom = {
   \ }
 
 let NERDTreeShowHidden=1
+
+nnoremap <leader>d :NERDTreeToggle<CR>
+nnoremap <leader>g :GitGutterToggle<CR>
+
 
 " " autocomplete stuff
 " if has('nvim')
@@ -140,6 +161,8 @@ Plug 'tpope/vim-surround'
 " fuzzy finder
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+
+set rtp+=/usr/local/opt/fzf
 
 " Using floating windows of Neovim to start fzf
 if has('nvim')
@@ -242,6 +265,7 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md set spell
 autocmd BufRead,BufNewFile *.ml set filetype=ocaml
 autocmd BufRead,BufNewFile *.mli set filetype=ocaml
+autocmd BufRead,BufNewFile *.hoon set filetype=hoon
 
 " *************************
 " LanguageClient
@@ -254,6 +278,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " coc-css
 " coc-tailwindcss
 " coc-yaml
+" coc-flutter
 " View all extensions with :CocList extensions
 
 " Async linting ALE
@@ -291,9 +316,12 @@ endfunction
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+"xmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
 nnoremap <silent> gn :ALENext<CR>
+
+" Hoon syntax highlighting and keybindings -- https://github.com/urbit/hoon.vim
+Plug 'urbit/hoon.vim'
 
 let g:ale_ocaml_ocamlformat_options = "--enable-outside-detected-project"
 
@@ -304,6 +332,7 @@ let g:ale_linters = {
   \ 'typescript': ['tsserver'],
   \ 'reason': ['ocaml-lsp'],
   \ 'ocaml': ['ocaml-lsp'],
+  \ 'python': ['flake8'],
   \}
 let g:ale_linters_ignore = {
   \ 'typescript': ['tslint'],
@@ -315,6 +344,10 @@ let g:ale_fixers = {
   \ 'json': ['prettier'],
   \ 'markdown': ['prettier'],
   \ 'typescript': ['prettier', 'eslint'],
+  \ 'css': ['prettier'],
+  \ 'cpp': ['astyle'],
+  \ 'c': ['astyle'],
+  \ 'python': ['autopep8']
   \}
 
 " OCaml/Reason specific stuff
@@ -416,7 +449,7 @@ call plug#end()
     else
         let g:onedark_termcolors=256
         let g:onedark_terminal_italics=1
-        colorscheme base16-black-metal-bathory
+        colorscheme base16-horizon-dark
     endif
     " make the highlighting of tabs and other non-text less annoying
     highlight SpecialKey ctermfg=19 guifg=#333333
@@ -443,7 +476,7 @@ syntax enable
 
 set conceallevel=1 "show quotes on json files
 
-set autoindent
+"set autoindent
 set autoread " reload files when changed on disk, i.e. via `git checkout`
 set textwidth=80
 
@@ -511,15 +544,12 @@ set t_ZR=^[[23m
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 set guifont=Iosevka:h16
 
-let mapleader = ','
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 "nnoremap <leader>a :Ag<space>
 
-nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
 nmap <silent> <leader>b :Buffers<cr>
 
 " fuzzy finder

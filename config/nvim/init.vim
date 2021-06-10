@@ -64,7 +64,7 @@ let g:startify_bookmarks = [
   \ { 'c': '~/dotfiles/config/nvim/init.vim' },
   \ { 'g': '~/.gitconfig' },
   \ { 'z': '~/.zshrc' },
-  \ { 'a': '~/alias' },
+  \ { 'a': '~/.alias' },
   \ { 'd': '~/dotfiles' },
   \ { 'j': '~/.gthnk/journal.txt' }
 \ ]

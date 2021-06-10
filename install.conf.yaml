@@ -12,6 +12,7 @@
     ~/.config/kitty: config/kitty
     ~/.gitconfig: gitconfig
     ~/.p10k.zsh: p10k.zsh
+    ~/.alias: alias
 
 - create:
     - ~/downloads

@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/dylanirlbeck/.oh-my-zsh"
+#export ZSH="/Users/dylanirlbeck/.oh-my-zsh"
 export GPG_TTY=$(tty)
 export PATH="$HOME/bin:$PATH"
 
@@ -91,7 +91,7 @@ DISABLE_UPDATE_PROMPT="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git npm yarn zsh-autosuggestions)
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # Custom cd
 chpwd() ls
@@ -159,10 +159,10 @@ fco() {
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-DEFAULT_USER="dylanirlbeck"
-source $HOME/alias
+DEFAULT_USER="dylanjirlbeck"
+source $HOME/.alias
 
-eval "$(fnm env)"
+#eval "$(fnm env)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 set -o vi
@@ -175,5 +175,7 @@ test -r /Users/dylanirlbeck/.opam/opam-init/init.zsh && . /Users/dylanirlbeck/.o
 
 # Ruby stuff
 export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"

@@ -94,7 +94,7 @@ plugins=(git npm yarn zsh-autosuggestions)
 #source $ZSH/oh-my-zsh.sh
 
 # Custom cd
-chpwd() ls
+chpwd() exa 
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
 
@@ -179,3 +179,10 @@ export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+(( ! ${+functions[p10k]} )) || p10k finalize
+
+
+# Extend zsh history to multiple sessions
+setopt APPEND_HISTORY
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off

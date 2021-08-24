@@ -64,7 +64,7 @@ let g:startify_bookmarks = [
   \ { 'c': '~/dotfiles/config/nvim/init.vim' },
   \ { 'g': '~/.gitconfig' },
   \ { 'z': '~/.zshrc' },
-  \ { 'a': '~/alias' },
+  \ { 'a': '~/.alias' },
   \ { 'd': '~/dotfiles' },
   \ { 'j': '~/.gthnk/journal.txt' }
 \ ]
@@ -73,6 +73,11 @@ let g:startify_bookmarks = [
 
 " :MarkdownPreview[Stop] https://github.com/iamcco/markdown-preview.nvim
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  } 
+
+augroup Markdown
+  autocmd!
+  autocmd FileType markdown set wrap
+augroup END
 
 " set to 1, the vim will refresh markdown when save the buffer or
 " leave from insert mode, default 0 is auto refresh markdown as you edit or
@@ -162,7 +167,7 @@ Plug 'tpope/vim-surround'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
-set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
 
 " Using floating windows of Neovim to start fzf
 if has('nvim')

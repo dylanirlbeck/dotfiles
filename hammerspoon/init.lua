@@ -63,6 +63,18 @@ hotkey.bind(mashApps, '1', function() application.launchOrFocus('kitty') end)
 hotkey.bind(mashApps, '2', function() application.launchOrFocus('Firefox') end)
 hotkey.bind(mashApps, '3', showSlack)
 
+function moveWindowToDisplay(d)
+  return function()
+    local displays = hs.screen.allScreens()
+    local win = hs.window.focusedWindow()
+    win:moveToScreen(displays[d], false, true)
+  end
+end
+
+hs.hotkey.bind({"cmd"}, "1", moveWindowToDisplay(1))
+hs.hotkey.bind({"cmd"}, "2", moveWindowToDisplay(2))
+hs.hotkey.bind({"cmd"}, "3", moveWindowToDisplay(3))
+
 -- Reload automatically on config changes
 hs.pathwatcher.new(os.getenv('HOME') .. '/.hammerspoon/', hs.reload):start()
 hs.alert('Hammerspoon is locked and loaded', 1)

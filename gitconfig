@@ -1,6 +1,6 @@
 [user]
-	email = dylanirlbeck@gmail.com
-	name = dylanirlbeck
+	email = dylan@flexport.com
+	name = Dylan Irlbeck
 [alias]
     cleanup = "!git remote prune origin && git gc && git clean -df && git stash clear"
 
@@ -51,14 +51,14 @@
 
 # git mergetool
 [merge]
-  tool = vimdiff
+  tool = vscode
   conflictstyle = diff3
 
 [mergetool]
   prompt = true
 
-[mergetool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
 
 [difftool]
   prompt = false
@@ -91,7 +91,7 @@
 
 # push easily. http://stackoverflow.com/a/23918418/89484
 [push]
-  default = current
+	default = current
   followTags = true
 
 [filter "lfs"]
@@ -109,3 +109,5 @@
 [log]
     date = relative
 
+[init]
+	defaultBranch = main

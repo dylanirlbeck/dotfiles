@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-echo "Read through this file first. Hit ctrl+c now."
+# echo "Read through this file first. Hit ctrl+c now."
 read -n 1
 
 ## TODO investigate using a Brewfile
 # brew bundle
 
-echo 'MacOS Setup'
-source scripts/setup_mac.sh
+#echo 'MacOS Setup'
+#source scripts/setup_mac.sh
 
 echo 'Symlink setup'
 source ./install

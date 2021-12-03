@@ -2,6 +2,7 @@
 " VimPlug
 " *********************************
 call plug#begin('~/.config/nvim/bundle')
+
 let mapleader = ','
 " *************************
 " General Enhancements
@@ -328,12 +329,25 @@ nnoremap <silent> gn :ALENext<CR>
 " Hoon syntax highlighting and keybindings -- https://github.com/urbit/hoon.vim
 Plug 'urbit/hoon.vim'
 
+" let s:LSP_CONFIG = {
+" \  'flow': {
+" \    'command': exepath('flow'),
+" \    'args': ['lsp'],
+" \    'filetypes': ['javascript', 'javascriptreact'],
+" \    'initializationOptions': {},
+" \    'requireRootPattern': 1,
+" \    'settings': {},
+" \    'rootPatterns': ['.flowconfig']
+" \  }
+" \}
+
 let g:ale_ocaml_ocamlformat_options = "--enable-outside-detected-project"
+let g:ale_ruby_rubocop_options = '--config $HOME/flexport/.rubocop.yml'
 
 let g:ale_completion_enabled = 0
 let g:ale_fix_on_save = 1
 let g:ale_linters = {
-  \ 'javascript': ['eslint'],
+  \ 'javascript': ['flow-language-server', 'eslint'],
   \ 'typescript': ['tsserver'],
   \ 'reason': ['ocaml-lsp'],
   \ 'ocaml': ['ocaml-lsp'],
@@ -352,11 +366,11 @@ let g:ale_fixers = {
   \ 'css': ['prettier'],
   \ 'cpp': ['astyle'],
   \ 'c': ['astyle'],
-  \ 'python': ['autopep8']
+  \ 'python': ['autopep8'],
+  \ 'ruby': ['rubocop', 'prettier']
   \}
 
 " OCaml/Reason specific stuff
-
 
 " Note, you need to open vim in the root directory of a project (where the
 " .bsconfig is) in order to get refmt to work properly.
@@ -473,6 +487,7 @@ autocmd VimResized * :wincmd =
 
 " basics
 set number
+set relativenumber
 set nohlsearch
 
 filetype plugin indent on

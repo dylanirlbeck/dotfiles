@@ -14,10 +14,7 @@ The following are the main reason I created my dotfiles. For an extended list of
 
 Other tools/features included in these dotfiles:
 
-- Neovim (coc.nvim, optimized for reason/ocaml development)
-- Zsh
 - [prezto](https://github.com/sorin-ionescu/prezto)
-- Kitty
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
 - [Hammerspoon](http://www.hammerspoon.org/go/)
 - Fzf

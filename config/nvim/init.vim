@@ -14,6 +14,20 @@ if has('mouse')
     set mouse+=a
 endif
 
+" GitHub linking https://github.com/ruifm/gitlinker.nvim
+Plug 'nvim-lua/plenary.nvim'
+Plug 'ruifm/gitlinker.nvim'
+
+
+" Protobuf syntax highlighting https://github.com/wfxr/protobuf.vim
+Plug '~/develop/protobuf.vim'
+
+" Super fast minimap written in Rust https://github.com/wfxr/minimap.vim
+" Plug 'wfxr/minimap.vim'
+" let g:minimap_width = 10
+" let g:minimap_auto_start = 1
+" let g:minimap_auto_start_win_enter = 1
+
 " Flutter dev
 Plug 'dart-lang/dart-vim-plugin'
 
@@ -141,6 +155,8 @@ let NERDTreeShowHidden=1
 
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
+
+map <leader>r :NERDTreeFind<cr>
 
 
 " " autocomplete stuff
@@ -301,8 +317,11 @@ set cmdheight=2
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Copy a buffer's relative file path into clipboard.
+nmap <silent> cp :let @+ = expand("%")<CR>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> <cr> :call <SID>show_documentation()<CR>
@@ -329,20 +348,9 @@ nnoremap <silent> gn :ALENext<CR>
 " Hoon syntax highlighting and keybindings -- https://github.com/urbit/hoon.vim
 Plug 'urbit/hoon.vim'
 
-" let s:LSP_CONFIG = {
-" \  'flow': {
-" \    'command': exepath('flow'),
-" \    'args': ['lsp'],
-" \    'filetypes': ['javascript', 'javascriptreact'],
-" \    'initializationOptions': {},
-" \    'requireRootPattern': 1,
-" \    'settings': {},
-" \    'rootPatterns': ['.flowconfig']
-" \  }
-" \}
-
 let g:ale_ocaml_ocamlformat_options = "--enable-outside-detected-project"
 let g:ale_ruby_rubocop_options = '--config $HOME/flexport/.rubocop.yml'
+let g:ale_ruby_rubocop_executable = 'bundle'
 
 let g:ale_completion_enabled = 0
 let g:ale_fix_on_save = 1
@@ -457,6 +465,8 @@ Plug 'jparise/vim-graphql'
 " always load as last one!
 " Plug 'ryanoasis/vim-devicons'
 call plug#end()
+
+lua require('gitlinker-config')
 
 " https://github.com/nicknisi/dotfiles/blob/master/config/nvim/init.vim
 " Colorscheme and final setup {{{

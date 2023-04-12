@@ -9,15 +9,21 @@ let mapleader = ','
 " *************************
 " Copies text to system clipboard as well as buffer
 set mouse=c
+
+set clipboard+=unnamedplus
 " Lets you use the mouse to click around
 if has('mouse')
     set mouse+=a
 endif
 
+" GitHub Copilot
+Plug 'github/copilot.vim'
+
 " GitHub linking https://github.com/ruifm/gitlinker.nvim
+"
+" Usage: <leader>gy for normal and visual mode.
 Plug 'nvim-lua/plenary.nvim'
 Plug 'ruifm/gitlinker.nvim'
-
 
 " Protobuf syntax highlighting https://github.com/wfxr/protobuf.vim
 Plug '~/develop/protobuf.vim'
@@ -50,6 +56,16 @@ Plug 'tpope/vim-eunuch'
 
 " Helpful Vim mappings https://github.com/tpope/vim-unimpaired
 Plug 'tpope/vim-unimpaired'
+
+" Code folding https://github.com/kevinhwang91/nvim-ufo
+Plug 'kevinhwang91/promise-async'
+Plug 'kevinhwang91/nvim-ufo'
+
+set foldcolumn=1
+set foldlevel=99
+set foldlevelstart=-1
+set foldenable
+set foldmethod=indent
 
 command! -nargs=1 CreateFile :e %:h/<args>
 
@@ -267,11 +283,6 @@ Plug 'airblade/vim-gitgutter'
 " Loads decorates and sorts git branches into an interactive buffer https://github.com/sodapopcan/vim-twiggy 
 " Plug 'sodapopcan/vim-twiggy'
 
-"nmap <silent> <leader>gst :Gstatus<cr>
-"nmap <leader>ge :Gedit<cr>
-"nmap <silent><leader>gr :Gread<cr>
-"nmap <silent><leader>gbl :Gblame<cr>
-
 " *************************
 " Language Server Related
 " *************************
@@ -288,19 +299,21 @@ autocmd BufRead,BufNewFile *.md set spell
 autocmd BufRead,BufNewFile *.ml set filetype=ocaml
 autocmd BufRead,BufNewFile *.mli set filetype=ocaml
 autocmd BufRead,BufNewFile *.hoon set filetype=hoon
+autocmd BufRead,BufNewFile *.java set filetype=java
 
 " *************************
 " LanguageClient
 " *************************
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim' , {'branch': 'release'}
 
 " Install/uninstall the following with :CocInstall/:CocUninstall
 " coc-json
-" coc-tsserver
 " coc-css
 " coc-tailwindcss
 " coc-yaml
 " coc-flutter
+" coc-protobuf
+" coc-java
 " View all extensions with :CocList extensions
 
 " Async linting ALE
@@ -375,9 +388,10 @@ let g:ale_fixers = {
   \ 'cpp': ['astyle'],
   \ 'c': ['astyle'],
   \ 'python': ['autopep8'],
-  \ 'ruby': ['rubocop', 'prettier']
+  \ 'ruby': ['rubocop']
   \}
 
+" \ 'ruby': ['rubocop', "'standardrb']
 " OCaml/Reason specific stuff
 
 " Note, you need to open vim in the root directory of a project (where the
@@ -466,6 +480,7 @@ Plug 'jparise/vim-graphql'
 " Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
+lua require('ufo').setup()
 lua require('gitlinker-config')
 
 " https://github.com/nicknisi/dotfiles/blob/master/config/nvim/init.vim
@@ -628,3 +643,5 @@ let g:python3_host_prog = "/usr/local/bin/python3"
 " autocmd vimenter * NERDTree
 " close vim sesh if nerdtree is last window open
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+set viminfo='100,n$HOME/.vim/files/info/viminfo

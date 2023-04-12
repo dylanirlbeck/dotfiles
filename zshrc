@@ -19,12 +19,22 @@ export ANDROID_SDK=/Users/dylanirlbeck/Library/Android/sdk
 export PATH=/Users/dylanirlbeck/Library/Android/sdk/platform-tools:$PATH
 
 # Zlib stuff
-export LDFLAGS="-L/usr/local/opt/zlib/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include"
-export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+# export LDFLAGS="-L/usr/local/opt/zlib/lib"
+# export CPPFLAGS="-I/usr/local/opt/zlib/include"
+# export CPPFLAGS=-I/usr/local/opt/openssl/include
+# export LDFLAGS=-L/usr/local/opt/openssl/lib npm install
+# export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
 
 # Flutter
 export PATH="$PATH:$HOME/bin/flutter/bin"
+
+# https://stackoverflow.com/questions/52671926/rails-may-have-been-in-progress-in-another-thread-when-fork-was-called
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# By default, let's use git stat with the base branch of master.
+# At some point, this should change to main.
+#
+export REVIEW_BASE=master
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -133,6 +143,10 @@ fco() {
   branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
   branch=$(echo "$branches" | fzf --multi ) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+get_alias() {
+  printf '%s\n' $aliases[$1]
 }
 
 # User configuration

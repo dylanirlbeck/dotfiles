@@ -7,6 +7,45 @@
     # find commits by source code
     fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
 
+    # From https://blog.jez.io/cli-code-review/.
+    #
+	review-base = !git merge-base HEAD \"${review_base:-origin/master}\"
+
+    # list files which have changed since REVIEW_BASE
+    # (REVIEW_BASE defaults to 'master' in my zshrc)
+    files = !git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")
+
+    # Same as above, but with a diff stat instead of just names
+    # (better for interactive use)
+	stat = !git diff --stat $(git review-base)
+
+    # Open all files changed since REVIEW_BASE in Vim tabs
+    # Then, run fugitive's :Gdiff in each tab, and finally
+    # tell vim-gitgutter to show +/- for changes since REVIEW_BASE
+	review = !nvim -p $(git files) +\"tabdo vert Gdiff ${review_base:-origin/master}\" +\"let g:gitgutter_diff_base = '${review_base:-origin/master}'\"
+
+    # Same as the above, except specify names of files as arguments,
+    # instead of opening all files:
+    # git reviewone foo.js bar.js
+    reviewone = !nvim -p +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+
+    # For when the diff is too big to review with :Gdiff
+	diff-review = !git diff $(git review-base)
+	# Review by commit
+	by-commit = !git log -p --reverse $(git review-base)..HEAD
+	# split-diff, using icdiff
+	icdiff = --paginate difftool --tool icdiff
+	# show the before, changes, and after for one tracked image
+	diff-img = difftool --tool imgdiff
+	# Show just the subject and body of a particular commit (default: HEAD)
+	message = log -n1 --format=\"%s%n%n%b\"
+	# Show a markdown-formatted summary of commits from {review_base:-origin/master} until HEAD
+	pr-summary = !git log --reverse --format=\"- **%s** (%h)%n%n%w(74,2,2)%b\" \"${review_base:-origin/master}\"..HEAD
+	# Get last commit authored by me
+	my-last = log -n1 --format=\"%H\" --author=\"\\([jJ]ake\\)\\|\\([jJ]acob\\) [zZ]immerman\"
+	root = rev-parse --show-toplevel
+	head = rev-parse HEAD
+
 [apply]
     # Detect whitespace errors when applying a patch
     whitespace = fix
@@ -33,6 +72,7 @@
     # https://git-scm.com/docs/git-update-index#_untracked_cache
     untrackedCache = true
 	safecrlf = false
+	fsmonitor = true
 
 [pager]
     diff = delta
@@ -56,6 +96,7 @@
 
 [mergetool]
   prompt = true
+	keepBackup = false
 
 [mergetool "vscode"]
   cmd = code --wait $MERGED

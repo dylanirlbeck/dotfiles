@@ -96,6 +96,15 @@ brew install rename # rename -x *- http://plasmasturm.org/code/rename/
 brew install tree
 brew install webkit2png # Screenshot web pages - https://github.com/paulhammond/webkit2png/
 brew install yarn
+brew install cloc
+brew install opam
+brew install sqlite
+brew install scc # better cloc
+brew install tree-sitter
+brew install zsh-completions
+
+brew tap homebrew/cask-fonts
+brew install font-iosevka
 
 
 ###############################################################################

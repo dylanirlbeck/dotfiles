@@ -362,13 +362,11 @@ nnoremap <silent> gn :ALENext<CR>
 Plug 'urbit/hoon.vim'
 
 let g:ale_ocaml_ocamlformat_options = "--enable-outside-detected-project"
-let g:ale_ruby_rubocop_options = '--config $HOME/flexport/.rubocop.yml'
-let g:ale_ruby_rubocop_executable = 'bundle'
 
 let g:ale_completion_enabled = 0
 let g:ale_fix_on_save = 1
 let g:ale_linters = {
-  \ 'javascript': ['flow-language-server', 'eslint'],
+  \ 'javascript': ['eslint'],
   \ 'typescript': ['tsserver'],
   \ 'reason': ['ocaml-lsp'],
   \ 'ocaml': ['ocaml-lsp'],
@@ -388,35 +386,10 @@ let g:ale_fixers = {
   \ 'cpp': ['astyle'],
   \ 'c': ['astyle'],
   \ 'python': ['autopep8'],
-  \ 'ruby': ['rubocop']
   \}
 
 " \ 'ruby': ['rubocop', "'standardrb']
 " OCaml/Reason specific stuff
-
-" Note, you need to open vim in the root directory of a project (where the
-" .bsconfig is) in order to get refmt to work properly.
-function! s:fix_refmt(buffer) abort
-  let ext = expand('#' . a:buffer . ':e')
-  if ext ==# 'rei'
-    return {
-    \   'command': 'esy refmt --interface true'
-    \}
-  else
-    return {
-    \   'command': 'esy refmt'
-    \}
-  endif
-endfunction
-
-if filereadable("./node_modules/.bin/bsrefmt")
-  " We're in a BuckleScript project
-  let g:ale_reasonml_refmt_executable = "./node_modules/.bin/bsrefmt"
-  let g:ale_fixers.reason = ['refmt']
-else
-  " We're in a native project
-  let g:ale_fixers.reason = [function('s:fix_refmt')] 
-endif
 
 let g:ale_set_balloons = 1
 

@@ -1,15 +1,6 @@
 {
   "javascript.validate.enable": false,
   "languageserver": {
-    "flow": {
-      "command": "./node_modules/.bin/flow",
-      "args": ["lsp"],
-      "filetypes": ["javascript", "javascriptreact"],
-      "initializationOptions": {},
-      "requireRootPattern": 1,
-      "settings": {},
-      "rootPatterns": [".flowconfig"]
-    },
     "ocaml-lsp": {
       "command": "opam",
       "args": ["config", "exec", "--", "ocamllsp"],
@@ -30,41 +21,6 @@
           "directory": "/tmp/ccls"
         }
       }
-    },
-    "sorbet": {
-      "command": "bundle",
-      "args": [
-        "exec",
-        "srb",
-        "tc",
-        "--lsp",
-        "--enable-all-experimental-lsp-features"
-      ],
-      "filetypes": ["ruby"],
-      "settings": {}
-    },
-    "ruby-lsp": {
-      "command": "ruby-lsp",
-      "initializationOptions": {
-        "experimentalFeaturesEnabled": false,
-        "enabledFeatures": [
-          "codeActions",
-          "diagnostics",
-          "documentHighlights",
-          "documentLink",
-          "documentSymbols",
-          "foldingRanges",
-          "formatting",
-          "hover",
-          "inlayHint",
-          "onTypeFormatting",
-          "selectionRanges",
-          "semanticHighlighting",
-          "completion"
-        ],
-        "formatter": "auto"
-      },
-      "filetypes": ["ruby"]
     }
   }
 }

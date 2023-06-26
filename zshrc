@@ -18,13 +18,6 @@ export VISUAL=nvim
 export ANDROID_SDK=/Users/dylanirlbeck/Library/Android/sdk
 export PATH=/Users/dylanirlbeck/Library/Android/sdk/platform-tools:$PATH
 
-# Zlib stuff
-# export LDFLAGS="-L/usr/local/opt/zlib/lib"
-# export CPPFLAGS="-I/usr/local/opt/zlib/include"
-# export CPPFLAGS=-I/usr/local/opt/openssl/include
-# export LDFLAGS=-L/usr/local/opt/openssl/lib npm install
-# export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
-
 # Flutter
 export PATH="$PATH:$HOME/bin/flutter/bin"
 
@@ -200,27 +193,8 @@ setopt APPEND_HISTORY
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
-export GITHUB_USERNAME=dylan
-
 export PATH="/usr/local/sbin:$PATH"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
 
 eval "$(fnm env)"
 
 set -o vi
-
-export BUILDKITE_API_TOKEN='addf46359d16dca8f005df5b7c9e1a53d942efab'
-export SNOWFLAKE_WAREHOUSE_XS="DBT_DEV_XS"
-export SNOWFLAKE_WAREHOUSE_S="DBT_DEV_S"
-export SNOWFLAKE_WAREHOUSE_M="DBT_DEV_M"
-export SNOWFLAKE_WAREHOUSE_L="DBT_DEV_L"
-export SNOWFLAKE_USERNAME="dylan@flexport.com"
-export DBT_PROFILES_DIR="/Users/dylan/kimono/transform/dbt_transforms"
-
-# Created by `pipx` on 2021-10-28 15:43:44
-export PATH="$PATH:/Users/dylan/.local/bin"
-export KMO_HOME="/Users/dylan/kimono"
-export SNOWFLAKE_USERNAME="dylan@flexport.com"
-alias k='kubectl'

@@ -16,9 +16,6 @@ if has('mouse')
     set mouse+=a
 endif
 
-" GitHub Copilot
-Plug 'github/copilot.vim'
-
 " GitHub linking https://github.com/ruifm/gitlinker.nvim
 "
 " Usage: <leader>gy for normal and visual mode.

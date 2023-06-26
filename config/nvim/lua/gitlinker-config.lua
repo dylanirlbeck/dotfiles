@@ -9,7 +9,6 @@ require"gitlinker".setup({
     print_url = true,
   },
   callbacks = {
-        ["github.flexport.io"] = require"gitlinker.hosts".get_github_type_url,
         ["github.com"] = require"gitlinker.hosts".get_github_type_url,
   },
 -- default mapping to call url generation with action_callback

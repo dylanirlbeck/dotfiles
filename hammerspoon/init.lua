@@ -1,6 +1,7 @@
 -- Hammerspoon config: http://www.hammerspoon.org/go/
 local application = require "hs.application"
 local hotkey = require "hs.hotkey"
+local caffeinate = require "hs.caffeinate"
 local Grid = require "grid"
 
 local mashApps = {
@@ -38,10 +39,10 @@ hotkey.bind(mashGeneral, 'L', Grid.rightchunk)
 hotkey.bind(mashGeneral, 'K', Grid.topHalf)
 hotkey.bind(mashGeneral, 'J', Grid.bottomHalf)
 
-hotkey.bind(mashGeneral, 'U', Grid.topleft)
-hotkey.bind(mashGeneral, 'N', Grid.bottomleft)
-hotkey.bind(mashGeneral, 'I', Grid.topright)
-hotkey.bind(mashGeneral, 'M', Grid.bottomright)
+-- hotkey.bind(mashGeneral, 'U', Grid.topleft)
+-- hotkey.bind(mashGeneral, 'N', Grid.bottomleft)
+-- hotkey.bind(mashGeneral, 'I', Grid.topright)
+-- hotkey.bind(mashGeneral, 'M', Grid.bottomright)
 
 -- Spotify
 hotkey.bind(mashGeneral, 'P', hs.spotify.play)
@@ -74,6 +75,9 @@ end
 hs.hotkey.bind({"cmd"}, "1", moveWindowToDisplay(1))
 hs.hotkey.bind({"cmd"}, "2", moveWindowToDisplay(2))
 hs.hotkey.bind({"cmd"}, "3", moveWindowToDisplay(3))
+
+-- Automatically lock screen
+hotkey.bind(mashGeneral, 'I', caffeinate.lockScreen)
 
 -- Reload automatically on config changes
 hs.pathwatcher.new(os.getenv('HOME') .. '/.hammerspoon/', hs.reload):start()

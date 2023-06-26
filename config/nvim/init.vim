@@ -2,16 +2,34 @@
 " VimPlug
 " *********************************
 call plug#begin('~/.config/nvim/bundle')
+
 let mapleader = ','
 " *************************
 " General Enhancements
 " *************************
 " Copies text to system clipboard as well as buffer
 set mouse=c
+
+set clipboard+=unnamedplus
 " Lets you use the mouse to click around
 if has('mouse')
     set mouse+=a
 endif
+
+" GitHub linking https://github.com/ruifm/gitlinker.nvim
+"
+" Usage: <leader>gy for normal and visual mode.
+Plug 'nvim-lua/plenary.nvim'
+Plug 'ruifm/gitlinker.nvim'
+
+" Protobuf syntax highlighting https://github.com/wfxr/protobuf.vim
+Plug '~/develop/protobuf.vim'
+
+" Super fast minimap written in Rust https://github.com/wfxr/minimap.vim
+" Plug 'wfxr/minimap.vim'
+" let g:minimap_width = 10
+" let g:minimap_auto_start = 1
+" let g:minimap_auto_start_win_enter = 1
 
 " Flutter dev
 Plug 'dart-lang/dart-vim-plugin'
@@ -35,6 +53,16 @@ Plug 'tpope/vim-eunuch'
 
 " Helpful Vim mappings https://github.com/tpope/vim-unimpaired
 Plug 'tpope/vim-unimpaired'
+
+" Code folding https://github.com/kevinhwang91/nvim-ufo
+Plug 'kevinhwang91/promise-async'
+Plug 'kevinhwang91/nvim-ufo'
+
+set foldcolumn=1
+set foldlevel=99
+set foldlevelstart=-1
+set foldenable
+set foldmethod=indent
 
 command! -nargs=1 CreateFile :e %:h/<args>
 
@@ -140,6 +168,8 @@ let NERDTreeShowHidden=1
 
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
+
+map <leader>r :NERDTreeFind<cr>
 
 
 " " autocomplete stuff
@@ -250,11 +280,6 @@ Plug 'airblade/vim-gitgutter'
 " Loads decorates and sorts git branches into an interactive buffer https://github.com/sodapopcan/vim-twiggy 
 " Plug 'sodapopcan/vim-twiggy'
 
-"nmap <silent> <leader>gst :Gstatus<cr>
-"nmap <leader>ge :Gedit<cr>
-"nmap <silent><leader>gr :Gread<cr>
-"nmap <silent><leader>gbl :Gblame<cr>
-
 " *************************
 " Language Server Related
 " *************************
@@ -271,19 +296,21 @@ autocmd BufRead,BufNewFile *.md set spell
 autocmd BufRead,BufNewFile *.ml set filetype=ocaml
 autocmd BufRead,BufNewFile *.mli set filetype=ocaml
 autocmd BufRead,BufNewFile *.hoon set filetype=hoon
+autocmd BufRead,BufNewFile *.java set filetype=java
 
 " *************************
 " LanguageClient
 " *************************
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim' , {'branch': 'release'}
 
 " Install/uninstall the following with :CocInstall/:CocUninstall
 " coc-json
-" coc-tsserver
 " coc-css
 " coc-tailwindcss
 " coc-yaml
 " coc-flutter
+" coc-protobuf
+" coc-java
 " View all extensions with :CocList extensions
 
 " Async linting ALE
@@ -300,8 +327,11 @@ set cmdheight=2
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Copy a buffer's relative file path into clipboard.
+nmap <silent> cp :let @+ = expand("%")<CR>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> <cr> :call <SID>show_documentation()<CR>
@@ -352,35 +382,11 @@ let g:ale_fixers = {
   \ 'css': ['prettier'],
   \ 'cpp': ['astyle'],
   \ 'c': ['astyle'],
-  \ 'python': ['autopep8']
+  \ 'python': ['autopep8'],
   \}
 
+" \ 'ruby': ['rubocop', "'standardrb']
 " OCaml/Reason specific stuff
-
-
-" Note, you need to open vim in the root directory of a project (where the
-" .bsconfig is) in order to get refmt to work properly.
-function! s:fix_refmt(buffer) abort
-  let ext = expand('#' . a:buffer . ':e')
-  if ext ==# 'rei'
-    return {
-    \   'command': 'esy refmt --interface true'
-    \}
-  else
-    return {
-    \   'command': 'esy refmt'
-    \}
-  endif
-endfunction
-
-if filereadable("./node_modules/.bin/bsrefmt")
-  " We're in a BuckleScript project
-  let g:ale_reasonml_refmt_executable = "./node_modules/.bin/bsrefmt"
-  let g:ale_fixers.reason = ['refmt']
-else
-  " We're in a native project
-  let g:ale_fixers.reason = [function('s:fix_refmt')] 
-endif
 
 let g:ale_set_balloons = 1
 
@@ -444,6 +450,9 @@ Plug 'jparise/vim-graphql'
 " Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
+lua require('ufo').setup()
+lua require('gitlinker-config')
+
 " https://github.com/nicknisi/dotfiles/blob/master/config/nvim/init.vim
 " Colorscheme and final setup {{{
     " This call must happen after the plug#end() call to ensure
@@ -473,6 +482,7 @@ autocmd VimResized * :wincmd =
 
 " basics
 set number
+set relativenumber
 set nohlsearch
 
 filetype plugin indent on
@@ -603,3 +613,5 @@ let g:python3_host_prog = "/usr/local/bin/python3"
 " autocmd vimenter * NERDTree
 " close vim sesh if nerdtree is last window open
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+set viminfo='100,n$HOME/.vim/files/info/viminfo

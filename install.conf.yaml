@@ -13,6 +13,7 @@
     ~/.gitconfig: gitconfig
     ~/.p10k.zsh: p10k.zsh
     ~/.alias: alias
+    ~/.zpreztorc: zpreztorc
 
 - create:
     - ~/downloads

@@ -18,19 +18,22 @@ export VISUAL=nvim
 export ANDROID_SDK=/Users/dylanirlbeck/Library/Android/sdk
 export PATH=/Users/dylanirlbeck/Library/Android/sdk/platform-tools:$PATH
 
-# Zlib stuff
-export LDFLAGS="-L/usr/local/opt/zlib/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include"
-export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
-
 # Flutter
 export PATH="$PATH:$HOME/bin/flutter/bin"
+
+# https://stackoverflow.com/questions/52671926/rails-may-have-been-in-progress-in-another-thread-when-fork-was-called
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# By default, let's use git stat with the base branch of master.
+# At some point, this should change to main.
+#
+export REVIEW_BASE=master
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -89,8 +92,7 @@ DISABLE_UPDATE_PROMPT="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git npm yarn zsh-autosuggestions)
-
+# plugins=(git npm yarn zsh-autosuggestions)
 #source $ZSH/oh-my-zsh.sh
 
 # Custom cd
@@ -104,20 +106,20 @@ compinit
 kitty + complete setup zsh | source /dev/stdin
 
 # Kitty functions
-function kt-native() {
-  export PROJECT_DIR=$1
-  kitty --session ~/dotfiles/config/kitty/reason_native.conf
-}
+# function kt-native() {
+#   export PROJECT_DIR=$1
+#   kitty --session ~/dotfiles/config/kitty/reason_native.conf
+# }
 
-function kt-bs() {
-  export PROJECT_DIR=$1
-  kitty --session ~/dotfiles/config/kitty/bucklescript.conf
-}
+# function kt-bs() {
+#   export PROJECT_DIR=$1
+#   kitty --session ~/dotfiles/config/kitty/bucklescript.conf
+# }
 
-function kt-js() {
-  export PROJECT_DIR=$1
-  kitty --session ~/dotfiles/config/kitty/javascript.conf
-}
+# function kt-js() {
+#   export PROJECT_DIR=$1
+#   kitty --session ~/dotfiles/config/kitty/javascript.conf
+# }
 
 # fbd - delete git branch (including remote branches); credit to peterpme
 fbd() {
@@ -134,6 +136,10 @@ fco() {
   branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
   branch=$(echo "$branches" | fzf --multi ) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+get_alias() {
+  printf '%s\n' $aliases[$1]
 }
 
 # User configuration
@@ -159,13 +165,13 @@ fco() {
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-DEFAULT_USER="dylanjirlbeck"
+DEFAULT_USER="dylan"
+USER_PROFILE_PATH="$(echo ~/.zshrc)" 
 source $HOME/.alias
 
 #eval "$(fnm env)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-set -o vi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -177,7 +183,7 @@ test -r /Users/dylanirlbeck/.opam/opam-init/init.zsh && . /Users/dylanirlbeck/.o
 export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
 #eval "$(rbenv init -)"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+#source ~/powerlevel10k/powerlevel10k.zsh-theme
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 (( ! ${+functions[p10k]} )) || p10k finalize
 
@@ -186,3 +192,9 @@ source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 setopt APPEND_HISTORY
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
+export PATH="/usr/local/sbin:$PATH"
+
+eval "$(fnm env)"
+
+set -o vi

@@ -11,7 +11,7 @@
 # Install Xcode command line tools
 ###############################################################################
 echo "Installing Xcode Command Line Tools..."
-xcode-select --install
+#xcode-select --install
 
 
 ###############################################################################
@@ -77,10 +77,12 @@ done
 ###############################################################################
 echo "Homebrew: installing binaries and other packages..."
 brew install bat
+brew install exa
 brew install fzf
 brew install git
+brew install gh
 brew install git-delta
-brew install hub
+#brew install hub
 brew install httpie # https://httpie.org/
 brew install kitty # https://formulae.brew.sh/cask/kitty
 #brew install mackup
@@ -94,6 +96,15 @@ brew install rename # rename -x *- http://plasmasturm.org/code/rename/
 brew install tree
 brew install webkit2png # Screenshot web pages - https://github.com/paulhammond/webkit2png/
 brew install yarn
+brew install cloc
+brew install opam
+brew install sqlite
+brew install scc # better cloc
+brew install tree-sitter
+brew install zsh-completions
+
+brew tap homebrew/cask-fonts
+brew install font-iosevka
 
 
 ###############################################################################
@@ -113,20 +124,19 @@ yarn global add bs-platform
 # Install applications with Homebrew Cask
 ###############################################################################
 echo "Homebrew Cask: installing apps..."
-brew cask install 1password
-brew cask install alfred
-brew cask install dash
-brew cask install docker
+brew install 1password
+brew install alfred
+brew install dash
+brew install docker
 # brew cask install dropbox
-#brew cask install figma
-brew cask install firefox
-brew cask install github
-brew cask install notion
-brew cask install slack
-brew cask install spotify
-brew cask install visual-studio-code
+#brew install figma
+brew install firefox
+# brew install github
+brew install notion
+brew install slack
+brew install spotify
+brew install visual-studio-code
 brew cask install zoomus
-
 
 ###############################################################################
 # Prompt user to install apps not available view brew
@@ -162,24 +172,9 @@ while true; do
     esac
 done
 
-
-###############################################################################
-# Execute installers downloaded with Homebrew Cask
-###############################################################################
-#echo "Opening installers..."
-
 ###############################################################################
 # Cleanup
 ###############################################################################
-brew cask cleanup
-
-
-###############################################################################
-# Install applications with mas-cli (Mac App Store CLI)
-###############################################################################
-echo "mas-cli: installing Mac App Store apps..."
-
-mas install 
+brew cleanup
 
 echo "macOS Config, Dev Tools, Apps are Done Setup!"
-#

@@ -55,8 +55,8 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-unimpaired'
 
 " Code folding https://github.com/kevinhwang91/nvim-ufo
-Plug 'kevinhwang91/promise-async'
-Plug 'kevinhwang91/nvim-ufo'
+" Plug 'kevinhwang91/promise-async'
+" Plug 'kevinhwang91/nvim-ufo'
 
 set foldcolumn=1
 set foldlevel=99
@@ -187,7 +187,7 @@ map <leader>r :NERDTreeFind<cr>
 "Plug 'preservim/nerdcommenter'
 
 " Comments using gcc / gcgc
-Plug 'git://github.com/tpope/vim-commentary.git'
+Plug 'tpope/vim-commentary'
 
 " multiple-cursors
 Plug 'terryma/vim-multiple-cursors'
@@ -276,7 +276,7 @@ Plug 'tpope/vim-git'
 " Git wrapper https://github.com/tpope/vim-fugitive
 Plug 'tpope/vim-fugitive'
 " Shows a git diff in the 'gutter' https://github.com/airblade/vim-gitgutter 
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 " Loads decorates and sorts git branches into an interactive buffer https://github.com/sodapopcan/vim-twiggy 
 " Plug 'sodapopcan/vim-twiggy'
 
@@ -450,8 +450,8 @@ Plug 'jparise/vim-graphql'
 " Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
-lua require('ufo').setup()
-lua require('gitlinker-config')
+" lua require('ufo').setup()
+" lua require('gitlinker-config')
 
 " https://github.com/nicknisi/dotfiles/blob/master/config/nvim/init.vim
 " Colorscheme and final setup {{{

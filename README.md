@@ -14,6 +14,7 @@ The following are the main reason I created my dotfiles. For an extended list of
 
 Other tools/features included in these dotfiles:
 
+- [VimPlug](https://github.com/junegunn/vim-plug) for Neovim plugin management
 - [prezto](https://github.com/sorin-ionescu/prezto)
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
 - [Hammerspoon](http://www.hammerspoon.org/go/)
@@ -32,8 +33,7 @@ Some other apps I use on a day-to-day basis:
 
 First, download the following tools.
 
-- [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
-- [Zsh and Oh-My-Zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
+- [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim) and 
 - [Kitty](https://sw.kovidgoyal.net/kitty/#quickstart)
 
 Clone the project.
@@ -55,17 +55,13 @@ accordingly.
 
 ### First time setup for MacOS users (experimental)
 
+> Note that this section is experimental, and you should use with discretion. Eventually it will be idempotent.
+
 After cloning this repo, you can run `first_time_setup.sh` to get a copy of *my* MacOS setup (i.e. apps, packages, dock, and general settings).
 
 ```
 ./first_time_setup.sh
 ```
-
-> Note that this script is rather new and very experimental, and you should use with discretion.
-
-## Neovim setup
-
-From this point on, you'll need to install [VimPlug](https://github.com/junegunn/vim-plug) for plugin management. After doing so, run `:PlugInstall` inside of Neovim to install the proper plugins.
 
 ### OCaml/Reason
 
